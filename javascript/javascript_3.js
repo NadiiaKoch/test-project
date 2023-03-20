@@ -31,13 +31,4 @@ function projectObject(src, proto) {
   return res;
 }
 
-// const res = {
-//   prop11: {
-//     prop22: {
-//       prop31: 31,
-//       prop32: 32
-//     }
-//   }
-// };
-
 console.log(projectObject(src, proto));

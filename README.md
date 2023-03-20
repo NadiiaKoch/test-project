@@ -32,7 +32,14 @@ $ node javascript/javascript_3
 ### Google Calendar busy intervals
 A program has been developed in JS which returns an array of free/busy intervals in a given time period for any shared Google calendar. The input is the shared Google calendar ID and the time period (starting and ending moments). The output is an array of busy intervals.
 
-To test, please use the email: t7094459@gmail.com password: test1234test.
+The program is currently being tested. Please use the test account for testing as described below.
+
+* Share your calendar with t7094459@gmail.com, [instructions](https://support.google.com/calendar/answer/37082?hl=en).
+P.S. If you don't want to share your personal calendar, the program will work with the test account calendar.
+* Log in to the test account: t7094459@gmail.com, password test1234test.
+* Open the index.html file in your browser.
+* Set the desired time period and the ID of the Google calendar you shared with t7094459@gmail.com (your email) and authenticate.
+* The occupied time intervals will be displayed on the page and in the console.
 
 
 ## SQL

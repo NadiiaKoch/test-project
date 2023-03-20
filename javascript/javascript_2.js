@@ -6,6 +6,7 @@ const sales = [
 
 function addTotal (sales) {
   return sales.map(sale => ({ ...sale, Total: sale.amount * sale.quantity }))
+    .sort((a, b) => a.Total - b.Total);
 };
 
 console.log(addTotal(sales));

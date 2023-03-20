@@ -2,25 +2,31 @@
 <html>
 
 <head>
-  <title>Google Calendar API Quickstart</title>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
+  <title>Google Calendar API</title>
 </head>
 
 <body>
-  <p>Google Calendar API Quickstart</p>
+  <p>Google Calendars busy intervals</p>
 
-  <!--Add buttons to initiate auth sequence and sign out-->
+  <!--Add inputs and buttons to initiate auth sequence and sign out-->
   <div>
-    <label >
+    <label>
+      Shared calendar
+      <input id="calendarId_input" type="email" placeholder="sophie@gmail.com" />
+    </label>
+
+    <label>
       Start date
       <input id="start_date_input" type="date" value="2023-03-01" />
     </label>
 
-    <label >
+    <label>
       End date
       <input id="end_date_input" type="date" value="2023-03-31" />
     </label>
-    </div>
+  </div>
+  <pre id="content" style="white-space: pre-wrap;"></pre>
   <button id="authorize_button" onclick="handleAuthClick()">Authorize</button>
   <button id="signout_button" onclick="handleSignoutClick()">Sign Out</button>
 
@@ -102,13 +108,13 @@
         }
         document.getElementById('signout_button').style.visibility = 'visible';
         document.getElementById('authorize_button').innerText = 'Refresh';
+
         const startDate = document.getElementById('start_date_input').value;
         const endDate = document.getElementById('end_date_input').value;
-        const calendarId = 'primary';
+        const calendarId = document.getElementById('calendarId_input').value || 'primary';
         const timeMin = new Date(startDate).toISOString() || '2023-03-01T00:00:00Z';
-        const timeMax = new Date(endDate).toISOString() ||'2023-03-31T23:59:59Z';
-        console.log(startDate);
-        console.log(endDate);
+        const timeMax = new Date(endDate).toISOString() || '2023-03-31T23:59:59Z';
+
         const events = await listBusyIntervals(calendarId, timeMin, timeMax);
         console.log(events);
       };
@@ -155,8 +161,10 @@
           'orderBy': 'startTime',
         };
         response = await gapi.client.calendar.events.list(request);
+        console.log('response', response)
       } catch (err) {
-        document.getElementById('content').innerText = err.message;
+        console.log('response', response)
+        document.getElementById('content').innerText = 'The calendar with this ID is not available.';
         return;
       }
 
@@ -171,11 +179,11 @@
         (str, event) => `${str}${event.start.dateTime || event.start.date} - ${event.end.dateTime || event.end.date}\n`,
         'Busy Intervals:\n');
       document.getElementById('content').innerText = output;
-      
       return events.map(event => `${event.start.dateTime || event.start.date} - ${event.end.dateTime || event.end.date}`);
     }
   </script>
   <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
   <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
 </body>
+
 </html>
