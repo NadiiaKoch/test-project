@@ -12,4 +12,4 @@ Date.prototype.daysTo = function (otherDate) {
 const d1 = new Date('2023-03-13');
 const d2 = new Date('2023-03-17');
 const daysBetween = d1.daysTo(d2); 
-console.log(daysBetween); // 5
+console.log(daysBetween); // 4
