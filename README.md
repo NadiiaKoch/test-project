@@ -36,7 +36,7 @@ The program is currently being tested. Please use the test account for testing a
 
 * Share your calendar with t7094459@gmail.com, [instructions](https://support.google.com/calendar/answer/37082?hl=en).
 P.S. If you don't want to share your personal calendar, the program will work with the test account calendar.
-* Log in to the test account: t7094459@gmail.com, password test1234test.
+* Log in to the test account: t7094459@gmail.com, password: test1234test.
 * Open the index.html file in your browser.
 * Set the desired time period and the ID of the Google calendar you shared with t7094459@gmail.com (your email) and authenticate.
 * The occupied time intervals will be displayed on the page and in the console.

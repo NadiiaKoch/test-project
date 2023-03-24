@@ -1,34 +1,65 @@
-const src = {
-  prop11: {
-    prop21: 21,
-    prop22: {
-      prop31: 31,
-      prop32: 32
+function projectObject(src, proto) {
+  const res = {};
+
+  for (const prop in proto) {
+    if (src.hasOwnProperty(prop)) {
+      if (typeof proto[prop] === 'object' && proto[prop] !== null) {
+        if (typeof src[prop] === 'object' && src[prop] !== null) {
+          const projectedObj = projectObject(src[prop], proto[prop]);
+          if (Object.keys(projectedObj).length > 0) {
+            res[prop] = projectedObj;
+          } else if (Object.keys(proto[prop]).length === 0) {
+            res[prop] = src[prop];
+          }
+        }
+      } else {
+        res[prop] = src[prop];
+      }
     }
+  }
+
+  return res;
+}
+
+const src = {
+  prop22: null,
+  prop33: {
+      prop331: 1,
+      prop332: 2
   },
-  prop12: 12
+  prop11: {
+      prop111: "value",
+      prop112: {
+          prop112: null
+      }
+  }
 };
 
 const proto = {
-  prop11: {
-    prop22: null
-  }
+  prop11:
+      {
+        prop22: null,
+        prop111: {
+          prop111: null
+        },
+        prop112: null
+      },
+  prop33: {},
+  prop22: 2
 };
 
-function projectObject(src, proto) {
-  const res = {};
-  //go through all the properties of the prototype
-  for (let prop in proto) {
-    //if the property is an object, then recursively call the function for it
-    if (typeof proto[prop] === 'object' && proto[prop] !== null 
-        && typeof src[prop] === 'object' && src[prop] !== null) {
-      res[prop] = projectObject(src[prop],proto[prop]);
-    //if the property is a primitive, then copy the value from the source
-    } else if (src.hasOwnProperty(prop)) {
-      res[prop] = src[prop];
-    }
-  }
-  return res;
-}
+// const res = {
+//   prop11: {
+//      prop112: {
+//         prop112: null
+//      }
+//   },
+//   prop33: {
+//      prop331: 1,
+//      prop332: 2
+//   },
+//   prop22: null
+// }
+
 
 console.log(projectObject(src, proto));
